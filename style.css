@@ -53,7 +53,7 @@ body {
 /* --- HERO SECTION --- */
 .hero {
     height: 100vh;
-    background: url('images/Sunset-Picture.JPG') no-repeat center center/cover;
+    background: url('images/Sunset-photo.JPG') no-repeat center center/cover;
 }
 
 .hero-overlay {
@@ -178,10 +178,131 @@ body {
     border: 6px solid white;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
+/* --- GALLERY SLIDER UPDATES --- */
+.gallery-slider {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end; /* Align content to bottom */
+}
 
-/* --- MOBILE RESPONSIVE --- */
-@media (max-width: 900px) {
-    .meet-container { flex-direction: column; text-align: center; }
-    .hero-content h1 { font-size: 2.5rem; }
-    .section-title { font-size: 3rem; }
+.slider-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.8s ease-in-out;
+    z-index: 1;
+}
+
+.bottom-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* This creates the blue wash from the bottom left */
+    background: linear-gradient(15deg, 
+        rgba(35, 140, 231, 0.9) 0%, 
+        rgba(35, 140, 231, 0.6) 40%, 
+        transparent 80%);
+    z-index: 2;
+}
+
+.slider-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    display: flex;
+    flex-direction: row; /* Text left, Cards right */
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 5% 80px 5%; /* Padding bottom for dots */
+}
+
+.text-area {
+    flex: 1;
+    color: white;
+    padding-right: 50px;
+}
+
+.text-area h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.text-area p {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 450px;
+}
+
+/* Foreground Carousel Cards */
+.carousel-container {
+    flex: 1;
+    width: 50%;
+    cursor: grab;
+}
+
+.carousel-container:active { cursor: grabbing; }
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 20px 0;
+    scrollbar-width: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.carousel-card {
+    min-width: 260px;
+    height: 340px;
+    border-radius: 20px; /* Rounded rectangle as requested */
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.carousel-card.active {
+    border-color: #fff;
+    transform: translateY(-10px);
+}
+
+.carousel-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Pagination Dots */
+.pagination-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 4;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dot.active {
+    background: white;
+    transform: scale(1.2);
 }
