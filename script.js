@@ -22,23 +22,26 @@ function updateSlider(index) {
     const selectedCard = cards[index];
     const newImageUrl = selectedCard.dataset.bg;
 
-    // Trigger Text Animation
+    // Reset Zoom Animation Layer
     textArea.classList.add('text-animating');
-
-    // Trigger Background Sync with Crossfade
+    nextBg.classList.remove('zoom-active');
     nextBg.style.backgroundImage = `url('${newImageUrl}')`;
-    nextBg.classList.add('fade-in');
+    
+    void nextBg.offsetWidth; // Trigger reflow
+
+    // Activate Crossfade + Zoom
+    nextBg.classList.add('zoom-active');
 
     setTimeout(() => {
-        // Update content mid-fade
+        // Update Content
         slideTitle.innerHTML = selectedCard.dataset.title;
         slideDesc.innerHTML = selectedCard.dataset.desc;
         textArea.classList.remove('text-animating');
 
-        // Swap permanent BG and reset overlay
+        // Swap backgrounds in the back
         mainBg.style.backgroundImage = `url('${newImageUrl}')`;
-        nextBg.classList.remove('fade-in');
-    }, 500);
+        nextBg.classList.remove('zoom-active');
+    }, 800);
 
     // Update States
     cards.forEach(c => c.classList.remove('active'));
@@ -47,14 +50,18 @@ function updateSlider(index) {
     selectedCard.classList.add('active');
     dots[index].classList.add('active');
 
-    // Smooth Scroll to Card
+    // Center the card in the track
+    const trackWidth = track.offsetWidth;
+    const cardOffset = selectedCard.offsetLeft;
+    const cardWidth = selectedCard.offsetWidth;
+    
     track.scrollTo({
-        left: selectedCard.offsetLeft - track.offsetLeft - 20,
+        left: cardOffset - (trackWidth / 2) + (cardWidth / 2),
         behavior: 'smooth'
     });
 }
 
-// 2. Drag to Scroll Logic
+// 2. Drag Logic
 let isDown = false;
 let startX;
 let scrollLeft;
@@ -66,15 +73,8 @@ track.addEventListener('mousedown', (e) => {
     track.style.cursor = 'grabbing';
 });
 
-track.addEventListener('mouseleave', () => {
-    isDown = false;
-    track.style.cursor = 'grab';
-});
-
-track.addEventListener('mouseup', () => {
-    isDown = false;
-    track.style.cursor = 'grab';
-});
+track.addEventListener('mouseleave', () => isDown = false);
+track.addEventListener('mouseup', () => isDown = false);
 
 track.addEventListener('mousemove', (e) => {
     if (!isDown) return;
