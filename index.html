@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nelson Agoyaoy | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Nelson Agoyaoy</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Meet Me</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>For his students, he wants <br> them to keep on dreaming.</h1>
+                <p>“Lahat ng pangarap matutupad basta mag-aral ng mabuti. <br> Tsaka matutunog sa mga magulang, huwag matigas ang ulo. <br> Tiyaga, liyaga lang, matatapos rin yan.”</p>
+                <span class="author">-NELSON G. AGOYAOY, Ed.D.</span>
+                
+                <div class="cta-group">
+                    <a href="#" class="btn btn-white">About Me</a>
+                    <a href="#" class="btn btn-blue">Invite as Speaker &raquo;</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="meet-me">
+        <div class="meet-container">
+            <div class="meet-text">
+                <h2 class="section-title">Meet Me</h2>
+                <h3 class="name-badge">Dr. Nelson G. Agoyaoy</h3>
+                
+                <p>With two decades of heart-led service in the academe, Dr. Nelson Agoyaoy joins the school year 2024-2025 as the K-10 Coordinator of Student Concerns. Known to many as a "Model Teacher of the Year," Dr. Nelson believes that education extends far beyond the textbook.</p>
+                
+                <p>As a Metrobank Foundation Outstanding Filipino awardee, Dr. Nelson brings a wealth of expertise to our Social Studies and Values Education departments. He enjoys life with his wife, Cherry May, a visual artist.</p>
+                
+                <a href="#" class="btn btn-blue-small">Learn more</a>
+            </div>
+
+            <div class="meet-image">
+                <div class="image-wrapper">
+                    <img src="images/man-speaking-in-mic.JPG" alt="Dr. Nelson G. Agoyaoy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-slider" id="gallery">
+        <div class="slider-bg" id="main-bg" style="background-image: url('images/malacanan-palace-manila.JPG');"></div>
+        <div class="slider-bg next-bg" id="next-bg"></div>
+        
+        <div class="bottom-gradient"></div>
+
+        <div class="slider-content">
+            <div class="carousel-container">
+                <div class="carousel-track" id="carousel-track">
+                    <div class="carousel-card active" data-bg="images/malacanan-palace-manila.JPG" data-title="A Voice for the Nation:<br>Addressing the Podium" data-desc="Lorem ipsum dolor sit amet..." onclick="updateSlider(0)">
+                        <img src="images/malacanan-palace-manila.JPG" alt="Palace">
+                    </div>
+                    <div class="carousel-card" data-bg="images/guesting-at-talkback.JPG" data-title="Broadcasting Change:<br>National Dialogue" data-desc="Engaging in national dialogues..." onclick="updateSlider(1)">
+                        <img src="images/guesting-at-talkback.JPG" alt="Talkback">
+                    </div>
+                    <div class="carousel-card" data-bg="images/metrobank-awards-2.JPG" data-title="Community Engagement" data-desc="Working with local leaders." onclick="updateSlider(2)">
+                        <img src="images/metrobank-awards-2.JPG" alt="Event">
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-area">
+                <h2 id="slide-title">A Voice for the Nation:<br>Addressing the Podium at Malacañan Palace</h2>
+                <p id="slide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
+            </div>
+        </div>
+        
+        <div class="pagination-dots" id="dot-container"></div>
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
