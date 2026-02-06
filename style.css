@@ -11,7 +11,7 @@ body {
     overflow-x: hidden;
 }
 
-/* --- NAVBAR --- */
+/* --- NAVBAR (Untouched) --- */
 .navbar {
     position: fixed;
     top: 20px;
@@ -50,7 +50,7 @@ body {
     font-weight: 500;
 }
 
-/* --- HERO SECTION --- */
+/* --- HERO SECTION (Untouched) --- */
 .hero {
     height: 100vh;
     background: url('images/Sunset-photo.JPG') no-repeat center center/cover;
@@ -88,7 +88,7 @@ body {
     margin-bottom: 35px;
 }
 
-/* --- MEET ME SECTION --- */
+/* --- MEET ME SECTION (Untouched) --- */
 .meet-me {
     padding: 100px 10%;
     background: white;
@@ -173,14 +173,14 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* --- GALLERY SLIDER --- */
+/* --- GALLERY SLIDER (Bottom Anchor Layout) --- */
 .gallery-slider {
     position: relative;
     height: 100vh;
     width: 100%;
     overflow: hidden;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-end; /* Anchors content to the bottom */
 }
 
 .slider-bg {
@@ -192,15 +192,15 @@ body {
     background-size: cover;
     background-position: center;
     z-index: 1;
-    transition: transform 1.2s ease-out;
+    transition: transform 1200ms cubic-bezier(0.73, 0, 0.24, 1), 
+                opacity 1200ms cubic-bezier(0.73, 0, 0.24, 1);
     transform: scale(1);
 }
 
 .next-bg {
     z-index: 2;
     opacity: 0;
-    transition: opacity 0.8s ease-in-out, transform 1.2s ease-out;
-    transform: scale(1.1);
+    transform: scale(1.1); 
 }
 
 .zoom-active {
@@ -214,10 +214,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(15deg, 
-        rgba(35, 140, 231, 0.9) 0%, 
-        rgba(35, 140, 231, 0.6) 40%, 
-        transparent 80%);
+    background: linear-gradient(0deg, 
+        rgba(35, 140, 231, 0.95) 0%, 
+        rgba(35, 140, 231, 0.7) 30%, 
+        transparent 70%);
     z-index: 3;
 }
 
@@ -225,39 +225,22 @@ body {
     position: relative;
     z-index: 4;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 0 5% 80px 5%;
-}
-
-.text-area {
-    flex: 1;
-    color: white;
-    padding-right: 50px;
-    transition: transform 0.6s ease, opacity 0.6s ease;
-}
-
-.text-animating {
-    transform: translateY(20px);
-    opacity: 0;
-}
-
-.text-area h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    line-height: 1.2;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr; 
+    align-items: flex-end; /* Aligns both carousel and text to the bottom */
+    padding: 0 5% 80px 5%; /* Adjusted bottom padding */
+    gap: 60px;
 }
 
 .carousel-container {
-    flex: 1;
-    width: 50%;
+    width: 100%;
     cursor: grab;
+    overflow: hidden;
 }
 
 .carousel-track {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 20px 0;
@@ -266,18 +249,19 @@ body {
 .carousel-track::-webkit-scrollbar { display: none; }
 
 .carousel-card {
-    min-width: 260px;
-    height: 340px;
+    min-width: 380px;
+    height: 450px;
     border-radius: 20px;
     overflow: hidden;
-    border: 3px solid rgba(255, 255, 255, 0.3);
+    border: 4px solid rgba(255, 255, 255, 0.2);
     flex-shrink: 0;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
+    transition: transform 1200ms cubic-bezier(0.73, 0, 0.24, 1), 
+                border-color 0.3s ease;
 }
 
 .carousel-card.active {
     border-color: #fff;
-    transform: translateY(-15px) scale(1.05);
+    transform: translateY(-10px) scale(1.02);
 }
 
 .carousel-card img {
@@ -286,19 +270,43 @@ body {
     object-fit: cover;
 }
 
+.text-area {
+    color: white;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    padding-bottom: 40px; /* Aligns text baseline with carousel */
+}
+
+.text-animating {
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+.text-area h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.text-area p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
 .pagination-dots {
     position: absolute;
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    gap: 12px;
     z-index: 5;
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background: rgba(255,255,255,0.4);
     border-radius: 50%;
     cursor: pointer;
@@ -307,5 +315,5 @@ body {
 
 .dot.active {
     background: white;
-    transform: scale(1.3);
+    transform: scale(1.4);
 }

@@ -22,14 +22,16 @@ function updateSlider(index) {
     const selectedCard = cards[index];
     const newImageUrl = selectedCard.dataset.bg;
 
-    // Reset Zoom Animation Layer
+    // Trigger text fade
     textArea.classList.add('text-animating');
+    
+    // Setup background layers
     nextBg.classList.remove('zoom-active');
     nextBg.style.backgroundImage = `url('${newImageUrl}')`;
     
     void nextBg.offsetWidth; // Trigger reflow
 
-    // Activate Crossfade + Zoom
+    // Activate 1200ms Zoom/Fade
     nextBg.classList.add('zoom-active');
 
     setTimeout(() => {
@@ -38,10 +40,10 @@ function updateSlider(index) {
         slideDesc.innerHTML = selectedCard.dataset.desc;
         textArea.classList.remove('text-animating');
 
-        // Swap backgrounds in the back
+        // Swap backgrounds and reset
         mainBg.style.backgroundImage = `url('${newImageUrl}')`;
         nextBg.classList.remove('zoom-active');
-    }, 800);
+    }, 1200); 
 
     // Update States
     cards.forEach(c => c.classList.remove('active'));
@@ -50,7 +52,7 @@ function updateSlider(index) {
     selectedCard.classList.add('active');
     dots[index].classList.add('active');
 
-    // Center the card in the track
+    // Centering logic
     const trackWidth = track.offsetWidth;
     const cardOffset = selectedCard.offsetLeft;
     const cardWidth = selectedCard.offsetWidth;
@@ -61,7 +63,7 @@ function updateSlider(index) {
     });
 }
 
-// 2. Drag Logic
+// Drag Logic
 let isDown = false;
 let startX;
 let scrollLeft;
