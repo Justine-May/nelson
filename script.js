@@ -76,3 +76,42 @@ track.addEventListener('mousemove', (e) => {
     const walk = (x - startX) * 2;
     track.scrollLeft = scrollLeft - walk;
 });
+
+// Add this to the bottom of script.js
+const contactForm = document.getElementById('contactForm');
+const statusMsg = document.getElementById('formStatus');
+const submitBtn = document.getElementById('submitBtn');
+
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Prevent page reload
+
+    // Change button state
+    submitBtn.innerText = "Sending...";
+    submitBtn.disabled = true;
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxEnSHgahHLqgef0GbtYC_GhA9HrvqQb04yJxpvIykK3gP0f4Etzy6DWxpBLEkEs-zp/exec'; // <--- PASTE YOUR URL HERE
+    const formData = new FormData(contactForm);
+
+    // Convert FormData to URL parameters for e.parameter in Apps Script
+    const queryString = new URLSearchParams(formData).toString();
+
+    fetch(`${scriptURL}?${queryString}`, {
+        method: 'POST'
+    })
+    .then(response => {
+        statusMsg.style.display = "block";
+        statusMsg.style.color = "#28a745"; // Success green
+        statusMsg.innerText = "Success! Your message has been sent.";
+        contactForm.reset();
+    })
+    .catch(error => {
+        statusMsg.style.display = "block";
+        statusMsg.style.color = "#dc3545"; // Error red
+        statusMsg.innerText = "Oops! Something went wrong. Please try again.";
+        console.error('Error!', error.message);
+    })
+    .finally(() => {
+        submitBtn.innerText = "Submit";
+        submitBtn.disabled = false;
+    });
+});
