@@ -12,7 +12,14 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">Nelson Agoyaoy</div>
-            <ul class="nav-links">
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Meet Me</a></li>
                 <li><a href="#gallery">Gallery</a></li>
@@ -66,21 +73,18 @@
         <div class="slider-content">
             <div class="carousel-container">
                 <div class="carousel-track" id="carousel-track">
-                    <div class="carousel-card active" data-bg="images/malacanan-palace-manila.JPG" data-title="A Voice for the Nation:<br>Addressing the Podium" data-desc="Lorem ipsum dolor sit amet..." onclick="updateSlider(0)">
+                    <div class="carousel-card active" data-bg="images/malacanan-palace-manila.JPG" data-title="A Voice for the Nation:<br>Addressing the Podium" data-desc="Lorem ipsum..." onclick="updateSlider(0)">
                         <img src="images/malacanan-palace-manila.JPG" alt="Palace">
                     </div>
-                    <div class="carousel-card" data-bg="images/guesting-at-talkback.JPG" data-title="Broadcasting Change:<br>National Dialogue" data-desc="Engaging in national dialogues..." onclick="updateSlider(1)">
+                    <div class="carousel-card" data-bg="images/guesting-at-talkback.JPG" data-title="Broadcasting Change" data-desc="National dialogues..." onclick="updateSlider(1)">
                         <img src="images/guesting-at-talkback.JPG" alt="Talkback">
                     </div>
-                    <div class="carousel-card" data-bg="images/metrobank-awards-2.JPG" data-title="Community Engagement" data-desc="Working with local leaders." onclick="updateSlider(2)">
-                        <img src="images/metrobank-awards-2.JPG" alt="Event">
                     </div>
-                </div>
             </div>
 
             <div class="text-area">
-                <h2 id="slide-title">A Voice for the Nation:<br>Addressing the Podium at Malacañan Palace</h2>
-                <p id="slide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
+                <h2 id="slide-title">A Voice for the Nation:<br>Addressing the Podium</h2>
+                <p id="slide-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
         </div>
         
