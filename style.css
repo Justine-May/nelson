@@ -1,0 +1,571 @@
+/* --- 1. CORE RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f1ea; /* High-end cream base */
+    color: #1a1a1a;
+    overflow-x: hidden;
+}
+
+/* --- 2. ADAPTIVE FLOATING HEADER --- */
+.site-header {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+/* Logo Circle */
+.logo-circle {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+}
+
+.logo-circle span {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+/* Floating Navigation Capsule - Initial Hero State */
+.nav-capsule {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    padding: 12px 35px;
+    transition: all 0.4s ease;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+
+/* Action Button */
+.nav-action .btn-primary {
+    background: #fff;
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* SOLID LIGHT MODE ADAPTATION (Triggered by .light-mode class in script.js) */
+.site-header.light-mode .nav-capsule {
+    background: #ffffff; /* Solid white for maximum visibility */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Visible border on light background */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Shadow to make it "float" */
+    backdrop-filter: none;
+}
+
+.site-header.light-mode .logo-circle {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.site-header.light-mode .logo-circle span,
+.site-header.light-mode .nav-links a {
+    color: #1a1a1a; /* Dark text for readability */
+}
+
+.site-header.light-mode .btn-primary {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* --- 3. HERO SECTION --- */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.hero-visual, 
+.hero-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.main-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: transform;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: white;
+    max-width: 900px;
+    padding: 0 20px;
+}
+
+.eyebrow {
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    display: block;
+    margin-bottom: 1.2rem;
+}
+
+.name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+    text-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.accent-line {
+    width: 60px;
+    height: 1px;
+    background-color: #fff;
+    margin: 0 auto 2rem;
+    opacity: 0.5;
+}
+
+.tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    max-width: 550px;
+    margin: 0 auto;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* --- 4. SCROLL INDICATOR --- */
+.scroll-wrapper {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+}
+
+.scroll-text {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, white, transparent);
+}
+
+/* --- 5. PROFESSIONAL ABOUT SECTION --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.bio-intro {
+    background-color: #f4f1ea;
+    color: #1a1a1a;
+    padding: 120px 0;
+    position: relative;
+    z-index: 2;
+}
+
+.bio-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 80px;
+    margin-bottom: 100px;
+    text-align: left;
+}
+
+.eyebrow-dark {
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.bio-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 30px;
+}
+
+.bio-lead {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    font-weight: 400;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.bio-body p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.bio-sidebar {
+    padding-top: 20px;
+    border-left: 1px solid #ddd;
+    padding-left: 40px;
+}
+
+.sidebar-item h4 {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    color: #2b5066;
+}
+
+.sidebar-item ul {
+    list-style: none;
+}
+
+.sidebar-item li {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    border-top: 1px solid #ddd;
+    padding-top: 60px;
+    text-align: left;
+}
+
+.col-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.styled-list {
+    list-style: none;
+}
+
+.styled-list li {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.styled-list li strong {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #2b5066;
+    margin-bottom: 5px;
+}
+
+/* --- 6. KOMBU GALLERY --- */
+.gallery-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f4f1ea;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
+
+.gallery-wrapper {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    /* Added padding to prevent the first image from sticking to the left edge */
+    padding-left: 0; 
+    will-change: transform; 
+}
+
+.gallery-item {
+    position: relative;
+    /* Keeps each image in its own 100vw 'room' to prevent overlapping */
+    flex: 0 0 100vw; 
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Forces the image to the exact center of the screen */
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(0.8);
+    opacity: 0.7; /* Increased base opacity slightly for visibility */
+}
+
+/* Active center image */
+.gallery-item.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.gallery-item img {
+    /* Mimicking the 1000x1250px ratio visually by prioritizing height */
+    height: 80vh; 
+    width: auto;
+    max-width: 70vw; /* Ensures landscape photos don't touch the screen edges */
+    object-fit: cover;
+    box-shadow: 0 60px 120px rgba(0,0,0,0.25);
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.05); /* Subtle editorial border */
+}
+
+/* --- THE FLOATING SIDE TEXT --- */
+.item-text {
+    position: absolute;
+    /* Fixed at the edge of the viewport so the centered image has room */
+    right: 8vw; 
+    bottom: 12vh;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 15vw, 11rem); /* Larger, more cinematic scale */
+    color: #1a3a4a;
+    line-height: 0.8;
+    z-index: 10;
+    pointer-events: none;
+    text-align: right;
+    
+    /* Stronger white glow to separate text from background images */
+    text-shadow: 0 0 40px #f4f1ea, 
+                 0 0 20px #f4f1ea,
+                 15px 15px 60px rgba(0, 0, 0, 0.15);
+}
+
+.item-text span {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5em; /* Luxury tracking */
+    margin-top: 20px;
+    color: #2b5066;
+}
+
+/* --- MOBILE ADJUSTMENTS --- */
+@media (max-width: 968px) {
+    .gallery-item img {
+        height: 60vh;
+        max-width: 85vw;
+    }
+    .item-text {
+        right: 5vw;
+        bottom: 5vh;
+        font-size: 5rem;
+    }
+}
+/* --- 7. RESPONSIVENESS --- */
+@media (max-width: 968px) {
+    .nav-container { padding: 0 20px; }
+    .nav-capsule { display: none; }
+    .bio-grid, .details-grid { grid-template-columns: 1fr; }
+    .bio-sidebar { border-left: none; padding-left: 0; border-top: 1px solid #ddd; padding-top: 40px; }
+    .gallery-item { width: 80vw; margin-right: 15vw; }
+    .item-text { right: -10%; bottom: 5%; font-size: 4rem; }
+}
+
+/* --- 8. INSTITUTIONAL FOOTER --- */
+.site-footer {
+    background-color: #1a1a1a; /* Dark finish to contrast the cream body */
+    color: rgba(255, 255, 255, 0.8);
+    padding: 100px 0 40px;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 60px;
+    margin-bottom: 80px;
+}
+
+.footer-logo {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    margin-bottom: 20px;
+}
+
+.footer-creds {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.footer-honor {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #2b5066; /* Accent color from gallery */
+    font-weight: 600;
+}
+
+.footer-col h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #fff;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 30px;
+    height: 1px;
+    background: #2b5066;
+}
+
+.footer-links, .affiliates {
+    list-style: none;
+}
+
+.footer-links li, .affiliates li, .footer-cta {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+.footer-email {
+    display: inline-block;
+    margin-top: 10px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid #2b5066;
+    padding-bottom: 2px;
+    transition: opacity 0.3s;
+}
+
+.footer-email:hover {
+    opacity: 0.7;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.designer-tag {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Responsive adjustment */
+@media (max-width: 968px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
